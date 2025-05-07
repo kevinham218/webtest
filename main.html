@@ -22,9 +22,42 @@
             /* 水平置中 */
             justify-content: center;
         }
+
         body {
             margin: 0;
             padding: 0;
+        }
+
+        .news-main-title {
+            color: #a00;
+            font-weight: bold;
+        }
+
+        .news-list .news-title {
+            color: #a00;
+        }
+
+        .news-list li {
+            border-bottom: 1px dotted #ccc;
+            padding: 0.5rem 0;
+        }
+
+        .btn-more {
+            margin-top: 1rem;
+        }
+
+        .news-date {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .news-summary {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        a {
+            text-decoration: none;
         }
     </style>
 </head>
@@ -32,7 +65,9 @@
 <body>
     <header>
         <div class="bg_red container-fluid">
-            <a href="#"><img src="https://nhuwebfile.nhu.edu.tw/UploadedFiles/2023/8/12abaa62-23e7-48a3-befe-f43f0fbbe0e3.png" alt="" class="img-fluid" style="width: 400px; margin: 10px;"></a>
+            <a href="#"><img
+                    src="https://nhuwebfile.nhu.edu.tw/UploadedFiles/2023/8/12abaa62-23e7-48a3-befe-f43f0fbbe0e3.png"
+                    alt="" class="img-fluid" style="width: 400px; margin: 10px;"></a>
             <nav class="navbar navbar-expand-lg navbar-light bg_red">
                 <div class="container-fluid">
                     <!-- <a class="navbar-brand nav-item" href="#">首頁</a> -->
@@ -119,12 +154,159 @@
                     </div>
                 </div>
             </nav>
-            <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2024/08/15/2/30272557.jpg&x=0&y=0&sw=0&sh=0&exp=3600" class="img-fluid rounded mx-auto d-block" alt="" style="width:  550px;">
+            <img src="https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2024/08/15/2/30272557.jpg&x=0&y=0&sw=0&sh=0&exp=3600"
+                class="img-fluid rounded mx-auto d-block" alt="" style="width:  550px;">
         </div>
 
     </header>
     <!-- Footer -->
+    <div class="container" style="padding: 3%;">
 
+        <!-- Tab Navigation -->
+        <ul class="nav nav-tabs" id="newsTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="latest-tab" data-bs-toggle="tab" data-bs-target="#latest"
+                    type="button" role="tab">最新消息</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="disaster-tab" data-bs-toggle="tab" data-bs-target="#disaster" type="button"
+                    role="tab">災情資訊</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="public-tab" data-bs-toggle="tab" data-bs-target="#public" type="button"
+                    role="tab">公開資訊</button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content mt-3" id="newsTabContent">
+            <!-- 最新消息 -->
+            <div class="tab-pane fade show active" id="latest" role="tabpanel">
+                <ul class="list-unstyled news-list">
+                    <li>
+                        <a href="#">
+                            <div class="d-flex justify-content-between">
+                                <span class="news-title">aaaa114年05月03日林邊鄉圖書館防災宣導</span>
+                                <span class="news-date">114-05-06</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span class="news-title">114年4月29日竹田分隊辦理快樂魚社區長照機構消防體驗</span>
+                            <span class="news-date">114-05-06</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <button class="btn btn-secondary btn-sm btn-more">更多</button>
+                </div>
+            </div>
+
+            <!-- 災情資訊 -->
+            <div class="tab-pane fade" id="disaster" role="tabpanel">
+                <ul class="list-unstyled news-list">
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span class="news-title">114年05月03日林邊鄉圖書館防災宣導</span>
+                            <span class="news-date">114-05-06</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span class="news-title">114年05月03日林邊鄉圖書館防災宣導</span>
+                            <span class="news-date">114-05-06</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <button class="btn btn-secondary btn-sm btn-more">更多</button>
+                </div>
+            </div>
+            <!-- 公開資訊 -->
+            <div class="tab-pane fade" id="public" role="tabpanel">
+                <ul class="list-unstyled news-list">
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span class="news-title">114年05月03日林邊鄉圖書館防災宣導</span>
+                            <span class="news-date">114-05-06</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span class="news-title">114年05月03日林邊鄉圖書館防災宣導</span>
+                            <span class="news-date">114-05-06</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="text-center">
+                    <button class="btn btn-secondary btn-sm btn-more">更多</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="padding-left:3%;padding-bottom:3%;">
+        宣導
+        <hr>
+        <!-- 主新聞：圖文混排 -->
+
+
+        <!-- 其他新聞列表 -->
+        <ul class="list-unstyled news-list">
+            <li>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <img src="44eb2701-4568-49b0-ae5f-99aecdd9b875.jpg" class="img-fluid rounded" alt="主圖">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="news-main-title">114年5月4日屏東慈鳳宮捐贈屏東義消分隊訓練操作服及運動鞋</div>
+                        <div class="news-date">114-05-06</div>
+                        <div class="news-summary">屏東慈鳳宮承載數百年來的信仰，支持在地義消...<a href="#">詳全文</a></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="d-flex justify-content-between">
+                    <span class="news-title">114年05月03日林邊鄉圖書館防災宣導</span>
+                    <span class="news-date">114-05-06</span>
+                </div>
+                <div class="news-summary">5月3日上午09時30分，配合林邊鄉公...<a href="#">詳全文</a></div>
+            </li>
+            <li>
+                <div class="d-flex justify-content-between">
+                    <span class="news-title">114年4月29日竹田分隊辦理快樂魚社區長照機構 自衛消防組訓練暨消防體驗</span>
+                    <span class="news-date">114-05-06</span>
+                </div>
+                <div class="news-summary">屏東縣政府消防局第二大隊竹田分隊積極加強...<a href="#">詳全文</a></div>
+            </li>
+            <li>
+                <div class="d-flex justify-content-between">
+                    <span class="news-title">114年4月23日里港分隊巡迴校園宣導 里港國小辦消防小尖兵</span>
+                    <span class="news-date">114-04-27</span>
+                </div>
+                <div class="news-summary">為落實消防安全並將防災知識落實到下一代...<a href="#">詳全文</a></div>
+            </li>
+            <li>
+                <div class="d-flex justify-content-between">
+                    <span class="news-title">114年4月25日屏東分隊狹小巷道救災演練</span>
+                    <span class="news-date">114-04-27</span>
+                </div>
+                <div class="news-summary">有鑒於狹小巷道狹窄，易致搶救困難影響消防...<a href="#">詳全文</a></div>
+            </li>
+            <li>
+                <div class="d-flex justify-content-between">
+                    <span class="news-title">114年4月25日春日鄉卑南國小防火宣導暨消防體驗</span>
+                    <span class="news-date">114-04-27</span>
+                </div>
+                <div class="news-summary">本分隊特於卑南國小進行防災宣導工作...<a href="#">詳全文</a></div>
+            </li>
+        </ul>
+
+        <!-- 更多按鈕 -->
+        <div class="text-center">
+            <button class="btn btn-secondary btn-sm btn-more">更多</button>
+        </div>
+    </div>
     <footer style="background-color: #e3e6e6;">
         <div class="container-fluid">
             <div style="padding: 10px;">
