@@ -219,7 +219,7 @@
     <Script>
         $(document).ready(function () {
             $.ajax({
-                url: "https://kevinham218.github.io/webtest/data.json",
+                url: "https://kevinham218.github.io/webtest/data.json?t=" + new Date().getTime(),
                 method: "GET",
                 success: function (data) {
                     var newsList = $('#news-list');
@@ -246,7 +246,7 @@
                 console.log("home")
 
                 $.ajax({
-                    url: "https://kevinham218.github.io/webtest/data.json",
+                    url: "https://kevinham218.github.io/webtest/data.json?t=" + new Date().getTime(),,
                     method: "GET",
                     success: function (data) {
                         console.log(data)
