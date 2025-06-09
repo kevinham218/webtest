@@ -87,6 +87,7 @@
     <header>
         <div class="bg_red container-fluid">
             <a href="#"><img src="" alt="" class="img-fluid" style="width: 400px; margin: 10px;" id="logo_img"></a>
+            <img src="" class="img-fluid rounded mx-auto d-block" alt="" style="width:  550px;" id="main_img">
             <nav class="navbar navbar-expand-lg navbar-light bg_red">
                 <div class="container-fluid">
                     <!-- <a class="navbar-brand nav-item" href="#">首頁</a> -->
@@ -101,6 +102,7 @@
                                 <a class="nav-link" aria-current="page" href="#" id="home"
                                     style="font-size: 20px;">最新公告</a>
                             </li>
+                            <!--若要新增導覽複製以下內容-->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 20px;">
@@ -123,7 +125,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li><a class="dropdown-item" href="#" id="db1">屏東縣各鄉鎮農業碳足跡概況模組</a></li>
                                     <li><a class="dropdown-item" href="#" id="db2">屏東縣各合作社碳足跡監控模組</a></li>
-                                    <li><a class="dropdown-item" href="#" id="db3">屏東縣各鄉鎮農業組織碳足跡概況模組</a></li>
+                                    <li><a class="dropdown-item" href="#" id="db3">碳排分析結果</a></li>
                                 </ul>
                             </li>
 
@@ -131,11 +133,9 @@
                     </div>
                 </div>
             </nav>
-            <img src="" class="img-fluid rounded mx-auto d-block" alt="" style="width:  550px;" id="main_img">
         </div>
 
     </header>
-    <!-- Footer -->
     <div id="content">
         <div class="container" style="padding-top:2%;padding-left:3%;padding-bottom:3%;">
             布告欄
@@ -375,7 +375,7 @@
             } else if (page === "machine") {
                 content = about6_content;
             }
-            // 插入內容
+            
             $row.append(content);
         });
     </Script>
