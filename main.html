@@ -87,7 +87,25 @@
     <header>
         <div class="bg_red container-fluid">
             <a href="#"><img src="" alt="" class="img-fluid" style="width: 400px; margin: 10px;" id="logo_img"></a>
-            <img src="" class="img-fluid rounded mx-auto d-block" alt="" style="width:  550px;" id="main_img">
+            <!-- 輪播 -->
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators" id="carousel_indicators">
+                </div>
+                <div class="carousel-inner" id="carousel_id">
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <!-- 輪播結束 -->
+            <!-- <img src="" class="img-fluid rounded mx-auto d-block" alt="" style="width:  550px;" id="main_img"> -->
             <nav class="navbar navbar-expand-lg navbar-light bg_red">
                 <div class="container-fluid">
                     <!-- <a class="navbar-brand nav-item" href="#">首頁</a> -->
@@ -106,9 +124,10 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 20px;">
-                                    關於我們
+                                    關於我們<!--導覽列的主標題-->
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <!--主標題下的子標題-->
                                     <li><a class="dropdown-item" href="#" id="about1">首長介紹</a></li>
                                     <li><a class="dropdown-item" href="#" id="about2">歷史改革</a></li>
                                     <li><a class="dropdown-item" href="#" id="about3">主要工作</a></li>
@@ -117,6 +136,7 @@
                                     <li><a class="dropdown-item" href="#" id="about6">編制及設備</a></li>
                                 </ul>
                             </li>
+                            <!--複製到這裡-->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 20px;">
@@ -138,7 +158,8 @@
     </header>
     <div id="content">
         <div class="container" style="padding-top:2%;padding-left:3%;padding-bottom:3%;">
-            布告欄
+            <img src="https://res.cloudinary.com/dalb6hlr7/image/upload/v1749621911/1749621727400_aivhav.png"
+                style="height: 100px;" alt="" class="img-fluid">
             <hr>
 
 
@@ -151,6 +172,7 @@
             </div>
         </div>
     </div>
+
     <footer style="background-color: #e3e6e6;">
         <div class="container-fluid">
             <div style="padding: 10px;">
@@ -166,6 +188,7 @@
     </footer>
     <Script>
         $(document).ready(function () {
+            var cdata = [];
             $.ajax({
                 url: "https://kevinham218.github.io/webtest/data2.json?t=" + new Date().getTime(),
                 method: "GET",
@@ -178,9 +201,34 @@
                     console.error(error);
                 }
             });
+            $.ajax({
+                url: "https://kevinham218.github.io/webtest/data3.json?t=" + new Date().getTime(),
+                method: "GET",
+                success: function (data) {
+                    console.log(data);
+                    cdata = data
+                    data.forEach(function (item, index) {
+                        // carousel indicators
+                        const isActive = index === 0 ? 'active' : '';
+                        $("#carousel_indicators").append(`
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${index}" class="${isActive}" aria-label="Slide ${index + 1}" ${isActive ? 'aria-current="true"' : ''}></button>
+        `);
+
+                        // carousel images
+                        $("#carousel_id").append(`
+          <div class="carousel-item ${isActive}">
+            <img src="${item.img}" class="img-fluid rounded mx-auto d-block" alt="slide-${index}" style="width: 550px;" id="carousel_img${index}">
+          </div>
+        `);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+            //這是關於我們-->左邊紅色導覽列
             t = `<div class="container-fluid">
   <div class="row">
-    <!-- 同一組選單：手機橫排、桌機直排 -->
     <div class="col-12 col-md-2 bg-danger text-white p-3">
       <h5 class="text-white d-none d-md-block">關於我們</h5>
 
@@ -195,6 +243,7 @@
     </div>
   </div>
 </div>`
+            
             contentclass = `<div class="container" style="padding-top:2%;padding-left:3%;padding-bottom:3%;">
             布告欄
             <hr>
@@ -210,9 +259,48 @@
         </div>`
             about1_content = `
       <div class="col-12 col-md-9 p-4">
-        <h3>首長介紹</h3>
-        <p>這裡是首長介紹的內容。</p>
-        <p>testffffffffffff</p>
+        <div class="container">
+            <h3>首長介紹</h3>
+        <hr style="border: 1px solid red;">
+        <!--hr 是紅色分割線-->
+        <div class="h6"><span ><img src="https://www-ws.pthg.gov.tw/Upload/2015pthg/16/relpic/6191/3798/67ac3cf7-a528-42b9-8e8f-4472a2eaffef.jpg" style="width: 164px;" alt=""></span></div>
+        <p style="margin: 21px 0; padding: 0; text-indent: 0; line-height: 1;">
+  <span id="isPasted" style="color: rgb(41, 105, 176); font-size: 1.5em;">局長李彬正</span>
+</p>
+        <div class="h6"><span style="font-size: 1.5em; color: rgb(243, 121, 52);">經歷 ：</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣消防局大隊長</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣消防局大隊長</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣消防局大隊長</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣消防局大隊長</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣消防局大隊長</span></div>
+        <div class="h6"><br></div>
+        <div class="h6"><span style="font-size: 1.5em; color: rgb(243, 121, 52);">現任 ：</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣政府消防局局長</span></div>
+        <div class="h6"><br></div>
+        <div class="h6"><span style="font-size: 1.5em; color: rgb(243, 121, 52);">學歷 ：</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">中央警官學校消防學系</span></div>
+      </div>
+        <div class="h6"><br></div>
+      <div class="container">
+            <h3>首長介紹</h3>
+        <hr style="border: 1px solid red;">
+        <div class="h6"><span ><img src="https://www-ws.pthg.gov.tw/Upload/2015pthg/16/relpic/6191/3798/67ac3cf7-a528-42b9-8e8f-4472a2eaffef.jpg" style="width: 164px;" alt=""></span></div>
+        <p style="margin: 21px 0; padding: 0; text-indent: 0; line-height: 1;">
+  <span id="isPasted" style="color: rgb(41, 105, 176); font-size: 1.5em;">局長李彬正</span>
+</p>
+        <div class="h6"><span style="font-size: 1.5em; color: rgb(243, 121, 52);">經歷 ：</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣消防局大隊長</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣消防局大隊長</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣消防局大隊長</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣消防局大隊長</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣消防局大隊長</span></div>
+        <div class="h6"><br></div>
+        <div class="h6"><span style="font-size: 1.5em; color: rgb(243, 121, 52);">現任 ：</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">屏東縣政府消防局局長</span></div>
+        <div class="h6"><br></div>
+        <div class="h6"><span style="font-size: 1.5em; color: rgb(243, 121, 52);">學歷 ：</span></div>
+        <div class="h6"><span style="font-size: 1.5em;">中央警官學校消防學系</span></div>
+      </div>
       </div>
     `
             about2_content = `
@@ -245,7 +333,6 @@
         <p>這裡是編制及設備的內容。</p>
       </div>
     `
-
             function homeconten() {
                 $.ajax({
                     url: "https://kevinham218.github.io/webtest/data.json?t=" + new Date().getTime(),
@@ -352,6 +439,22 @@
                 const $row = $("#content .row");
                 $row.append(about6_content);
             })
+            $('#carousel_id').on('click', 'img', function () {
+                const index = $(this).attr('id').replace('carousel_img', '');
+                console.log(index)
+                // 或 console.log(index) 看 log
+                $("#content").html(`
+    <div class="container">
+      <div class="col-12 col-md-9 p-4">
+        <h3>${cdata[index].title}</h3>
+        <hr style="border: 2px solid red; width: 100%;">
+        <p>${cdata[index].date}</p>
+        <p>${cdata[index].summary}</p>
+      </div>
+      </div>
+    `);
+                console.log(cdata)
+            });
         })
         $("#content").on("click", "[data-page]", function (e) {
             e.preventDefault();
@@ -375,7 +478,7 @@
             } else if (page === "machine") {
                 content = about6_content;
             }
-            
+
             $row.append(content);
         });
     </Script>
