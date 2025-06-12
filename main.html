@@ -403,7 +403,7 @@
                 `;
                             newsList.append(html);
                         });
-                        $('#update').append(`更新日期：${data[0].date}`);
+                        $('#update').text(`更新日期：${data[0].date}`);
                     },
                     error: function (xhr, status, error) {
                         console.error(error);
