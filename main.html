@@ -204,14 +204,13 @@
 
     <footer style="background-color: #e3e6e6;">
         <div class="container-fluid">
-            <div style="padding: 10px;">
+            <div style="padding: 10px;" id="update">
                 屏東縣農業處碳排淨零平台 版權所有<br>
                 地址：900219屏東市自由路527號<br>
                 電話：(08)732-0415<br>
                 傳真：(08) XXX XXXX<br>
                 服務時間：8:00~17:00<br>
                 傳真報案：(08) XXX XXXX<br>
-                更新日期：114-04-22
             </div>
         </div>
     </footer>
@@ -404,6 +403,7 @@
                 `;
                             newsList.append(html);
                         });
+                        $('#update').append(`更新日期：${data[0].date}`);
                     },
                     error: function (xhr, status, error) {
                         console.error(error);
