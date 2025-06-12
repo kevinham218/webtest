@@ -13,6 +13,27 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <style>
+        nav.navbar {
+            width: 100vw;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            border: none;
+        }
+
+        
+        .navbar .container-fluid {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        
+        .bg_red.container-fluid {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
         .sidebar {
             width: 250px;
             min-height: 100vh;
@@ -36,7 +57,14 @@
         }
 
         .bg_red {
-            background-color: #8cbcfb;
+            background-image: url("bg.png");
+        }
+
+        .bgmosaic-box {
+            width: 100%;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
         .parent {
@@ -106,7 +134,7 @@
             </div>
             <!-- 輪播結束 -->
             <!-- <img src="" class="img-fluid rounded mx-auto d-block" alt="" style="width:  550px;" id="main_img"> -->
-            <nav class="navbar navbar-expand-lg navbar-light bg_red">
+            <nav class="navbar navbar-expand-lg navbar-light bgmosaic-box">
                 <div class="container-fluid">
                     <!-- <a class="navbar-brand nav-item" href="#">首頁</a> -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
