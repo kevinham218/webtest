@@ -468,7 +468,7 @@
 
             currentIndex += batchSize;
 
-            // 如果已經載入完所有資料，就隱藏按鈕
+            
             if (currentIndex >= cdata.length) {
                 $('.btn-more').hide();
             }
@@ -482,7 +482,7 @@
                     cdata = data;
                     currentIndex = 0;
                     $('#news-list').empty();
-                    loadNextBatch(); // 載入初始10筆
+                    loadNextBatch(); 
                     $('#update').text(`更新日期：${data[0].date}`);
                 },
                 error: function (xhr, status, error) {
