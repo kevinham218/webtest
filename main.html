@@ -229,6 +229,7 @@
             var cdata2 = [];
             var currentIndex = 0;
             var batchSize = 10;
+            let currentNewsIndex = -1;
             $.ajax({
                 url: "https://kevinham218.github.io/webtest/data2.json?t=" + new Date().getTime(),
                 method: "GET",
@@ -449,7 +450,7 @@
                 }
 
                 var html = `
-                    <li class="mb-3">
+                    <li class="mb-3" data-index="${currentIndex + index}">
                         <div class="news-title fw-bold mb-1">${item.title}</div>
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="news-summary flex-grow-1">
@@ -473,6 +474,55 @@
             }
         }
 
+         $(document).on('click', '.news-item', function () {
+                currentNewsIndex = $(this).data('index');
+                showNewsDetail(currentNewsIndex);
+            });
+            function showNewsDetail(index) {
+                const item = cdata[index];
+                if (!item) return;
+
+                let fileLink = '';
+                if (item.file_name && item.file_name.trim() !== '') {
+                    const fileName = item.file_name.trim().toLowerCase();
+                    const fileUrl = `https://kevinham218.github.io/webtest/files/${item.file_name}`;
+                    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
+                    const isImage = imageExtensions.some(ext => fileName.endsWith(ext));
+
+                    if (isImage) {
+                        fileLink = `<img src="${fileUrl}" alt="${item.file_name}" style="max-height: 150px;">`;
+                    } else {
+                        fileLink = `🗂️ <a href="${fileUrl}" download>${item.file_name}</a>`;
+                    }
+                }
+
+                const detailHtml = `
+      <div class="container">
+        <div class="col-12 col-md-9 p-4">
+          <h3>${item.title}</h3>
+          <hr style="border: 2px solid red; width: 100%;">
+          <p>${item.date}</p>
+          <p>
+            <span style="font-size:14px;color:red">
+              資料來源: ${item.source}&emsp;&emsp;
+              資料來源網址: <a href="${item.sourceurl}" target="_blank">${item.sourceurl}</a>
+            </span>
+          </p>
+          <p>${item.summary}</p>
+          <br>
+          ${fileLink}
+          <br><br><br>
+          <div class="d-flex justify-content-around w-100">
+            <button type="button" class="btn btn-primary btn-prev">上一個</button>
+            <button type="button" class="btn btn-primary btn-home">首頁</button>
+            <button type="button" class="btn btn-primary btn-next">下一個</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+                $("#content").html(detailHtml);
+            }
         function homeconten() {
             $.ajax({
                 url: "https://kevinham218.github.io/webtest/data.json?t=" + new Date().getTime(),
@@ -567,6 +617,24 @@
       </div>
     `);
                 console.log(cdata)
+            });
+            $(document).on('click', '.btn-prev', function () {
+                if (currentNewsIndex > 0) {
+                    currentNewsIndex--;
+                    showNewsDetail(currentNewsIndex);
+                }
+            });
+
+            $(document).on('click', '.btn-next', function () {
+                if (currentNewsIndex < cdata.length - 1) {
+                    currentNewsIndex++;
+                    showNewsDetail(currentNewsIndex);
+                }
+            });
+
+            $(document).on('click', '.btn-home', function () {
+                location.reload();
+                homeconten()
             });
         })
         $("#content").on("click", "[data-page]", function (e) {
