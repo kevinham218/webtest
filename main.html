@@ -13,6 +13,12 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <style>
+        .break-url {
+            word-break: break-all;
+            overflow-wrap: break-word;
+            display: inline-block;
+            max-width: 100%;
+        }
         .navbar {
             position: relative;
             z-index: 1000;
@@ -505,7 +511,7 @@
           <p>
             <span style="font-size:14px;color:red">
               資料來源: ${item.source}&emsp;&emsp;
-              資料來源網址: <a href="${item.sourceurl}" target="_blank">${item.sourceurl}</a>
+              資料來源網址: <a href="${item.sourceurl}" class="break-url" target="_blank">${item.sourceurl}</a>
             </span>
           </p>
           <p>${item.summary}</p>
@@ -611,7 +617,7 @@
         <h3>${cdata2[index].title}</h3>
         <hr style="border: 2px solid red; width: 100%;">
         <p>${cdata2[index].date}</p>
-        <p><span style="font-size:14px;color:red">資料來源:${cdata2[index].source}&emsp;&emsp;資料來源網址:<a href="${cdata2[index].sourceurl}" target="_blank">${cdata2[index].sourceurl}</a></span></p>
+        <p><span style="font-size:14px;color:red">資料來源:${cdata2[index].source}&emsp;&emsp;資料來源網址:<a href="${cdata2[index].sourceurl}" class="break-url" target="_blank">${cdata2[index].sourceurl}</a></span></p>
         <p>${cdata2[index].summary}</p>
       </div>
       </div>
