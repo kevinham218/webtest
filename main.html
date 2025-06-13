@@ -461,8 +461,10 @@
                         <div class="news-title fw-bold mb-1">${item.title}</div>
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="news-summary flex-grow-1">
-                                ${item.summary}
-                            </div>
+    ${[...item.summary].length > 30
+                            ? [...item.summary].slice(0, 30).join('') + '...'
+                            : item.summary}
+</div>
                             <div class="news-file text-end ms-3">
                                 ${fileLink}
                             </div>
