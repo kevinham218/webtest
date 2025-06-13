@@ -226,6 +226,8 @@
     <Script>
         $(document).ready(function () {
             var cdata = [];
+            var currentIndex = 0;
+            var batchSize = 10;
             $.ajax({
                 url: "https://kevinham218.github.io/webtest/data2.json?t=" + new Date().getTime(),
                 method: "GET",
@@ -427,53 +429,67 @@
         <p>這裡是編制及設備的內容。</p>
       </div>
     `
-            function homeconten() {
-                $.ajax({
-                    url: "https://kevinham218.github.io/webtest/data.json?t=" + new Date().getTime(),
-                    method: "GET",
-                    success: function (data) {
-                        var newsList = $('#news-list');
-                        newsList.empty();
-                        console.log(data);
-                        data.forEach(function (item) {
-                            let fileLink = '';
-                            if (item.file_name && item.file_name.trim() !== '') {
-                                const fileName = item.file_name.trim().toLowerCase();
-                                const fileUrl = `https://kevinham218.github.io/webtest/files/${item.file_name}`;
-                                const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
+             function loadNextBatch() {
+            var newsList = $('#news-list');
+            var nextBatch = cdata.slice(currentIndex, currentIndex + batchSize);
 
-                                const isImage = imageExtensions.some(ext => fileName.endsWith(ext));
+            nextBatch.forEach(function (item) {
+                let fileLink = '';
+                if (item.file_name && item.file_name.trim() !== '') {
+                    const fileName = item.file_name.trim().toLowerCase();
+                    const fileUrl = `https://kevinham218.github.io/webtest/files/${item.file_name}`;
+                    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
 
-                                if (isImage) {
-                                    fileLink = `<img src="${fileUrl}" alt="${item.file_name}" style="max-height: 150px;">`;
-                                } else {
-                                    fileLink = `🗂️ <a href="${fileUrl}" download>${item.file_name}</a>`;
-                                }
-                            }
+                    const isImage = imageExtensions.some(ext => fileName.endsWith(ext));
 
-                            var html = `
-                    <li class="mb-3">
-            <div class="news-title fw-bold mb-1">${item.title}</div>
-            <div class="d-flex justify-content-between align-items-start">
-                <div class="news-summary flex-grow-1">
-                    ${item.summary}
-                </div>
-                <div class="news-file text-end ms-3">
-                    ${fileLink}
-                </div>
-            </div>
-            <div class="news-date text-muted mt-1">${item.date}</div>
-        </li>
-                `;
-                            newsList.append(html);
-                        });
-                        $('#update').text(`更新日期：${data[0].date}`);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(error);
+                    if (isImage) {
+                        fileLink = `<img src="${fileUrl}" alt="${item.file_name}" style="max-height: 150px;">`;
+                    } else {
+                        fileLink = `🗂️ <a href="${fileUrl}" download>${item.file_name}</a>`;
                     }
-                });
+                }
+
+                var html = `
+                    <li class="mb-3">
+                        <div class="news-title fw-bold mb-1">${item.title}</div>
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="news-summary flex-grow-1">
+                                ${item.summary}
+                            </div>
+                            <div class="news-file text-end ms-3">
+                                ${fileLink}
+                            </div>
+                        </div>
+                        <div class="news-date text-muted mt-1">${item.date}</div>
+                    </li>
+                `;
+                newsList.append(html);
+            });
+
+            currentIndex += batchSize;
+
+            // 如果已經載入完所有資料，就隱藏按鈕
+            if (currentIndex >= cdata.length) {
+                $('.btn-more').hide();
             }
+        }
+
+        function homeconten() {
+            $.ajax({
+                url: "https://kevinham218.github.io/webtest/data.json?t=" + new Date().getTime(),
+                method: "GET",
+                success: function (data) {
+                    cdata = data;
+                    currentIndex = 0;
+                    $('#news-list').empty();
+                    loadNextBatch(); // 載入初始10筆
+                    $('#update').text(`更新日期：${data[0].date}`);
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
             homeconten()
             $("#home").on("click", function () {
                 console.log("home clicked");
@@ -482,6 +498,9 @@
                 homeconten()
 
             });
+            $(document).on('click', '.btn-more', function () {
+    loadNextBatch();
+});
             $("#db1").on("click", function () {
                 $("#content").html(`
                     <iframe src="https://app.powerbi.com/view?r=eyJrIjoiYTQ1OWQ0YjEtOWE1OS00NjQ5LWFjMDAtZGVmMzUzYjQ3ZjM0IiwidCI6Ijg4NjI0N2VmLWFjZTktNDQ4Yy05NDMzLTZmNjkzZmI5MGE2OCIsImMiOjEwfQ%3D%3D
