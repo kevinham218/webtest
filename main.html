@@ -433,7 +433,7 @@
             var newsList = $('#news-list');
             var nextBatch = cdata.slice(currentIndex, currentIndex + batchSize);
 
-            nextBatch.forEach(function (item) {
+            nextBatch.forEach(function (item,index) {
                 let fileLink = '';
                 if (item.file_name && item.file_name.trim() !== '') {
                     const fileName = item.file_name.trim().toLowerCase();
