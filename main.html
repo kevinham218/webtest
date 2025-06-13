@@ -226,6 +226,7 @@
     <Script>
         $(document).ready(function () {
             var cdata = [];
+            var cdata2 = [];
             var currentIndex = 0;
             var batchSize = 10;
             $.ajax({
@@ -245,7 +246,7 @@
                 method: "GET",
                 success: function (data) {
                     console.log(data);
-                    cdata = data
+                    cdata2 = data
                     data.forEach(function (item, index) {
                         // carousel indicators
                         const isActive = index === 0 ? 'active' : '';
@@ -557,11 +558,11 @@
                 $("#content").html(`
     <div class="container">
       <div class="col-12 col-md-9 p-4">
-        <h3>${cdata[index].title}</h3>
+        <h3>${cdata2[index].title}</h3>
         <hr style="border: 2px solid red; width: 100%;">
-        <p>${cdata[index].date}</p>
-        <p><span style="font-size:14px;color:red">資料來源:${cdata[index].source}&emsp;&emsp;資料來源網址:<a href="${cdata[index].sourceurl}" target="_blank">${cdata[index].sourceurl}</a></span></p>
-        <p>${cdata[index].summary}</p>
+        <p>${cdata2[index].date}</p>
+        <p><span style="font-size:14px;color:red">資料來源:${cdata2[index].source}&emsp;&emsp;資料來源網址:<a href="${cdata2[index].sourceurl}" target="_blank">${cdata2[index].sourceurl}</a></span></p>
+        <p>${cdata2[index].summary}</p>
       </div>
       </div>
     `);
